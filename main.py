@@ -123,6 +123,8 @@ def add_data(host_, user_, pass_, fdata):
     string = 'Price, Mass, PanalSize, PanalResolution, GPUBrand, GPUCapacity, DiskType, RAMType, RAMCapacity, CPUSerie, CacheCapacity, Battery, OS, Touch, Thunderbolt, USB4, TypeC, KeyboardLight, Fingerprint, DVD'
     sql = "INSERT INTO selected_data (" + string + ") VALUES (" + 19*"%s, " + "%s)"
     for data in fdata:
+        if data == None:
+            continue
         val = list(miner(data).values())
         mycursor.execute(sql, val)
         database.commit()
