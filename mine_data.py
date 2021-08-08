@@ -38,7 +38,10 @@ def miner(raw_inp):
             outdict['PanalResolution'] = int(find[0]) * int(find[1])
 
         elif key == 'سازنده پردازنده گرافیکی':
-            outdict['GPUBrand'] = raw_inp[key].replace(" ","")
+            find = raw_inp[key].replace(" ", "")
+            GPUBrand = ['AMD', 'ATI', 'Apple', 'Intel', 'NVIDIA']
+            find = GPUBrand.index(find)
+            outdict['GPUBrand'] = find
 
         elif key == 'حافظه اختصاصی پردازنده گرافیکی':
             null = 'بدون حافظه\u200cی گرافیکی مجزا '
@@ -50,10 +53,7 @@ def miner(raw_inp):
         elif key == 'نوع حافظه داخلی':
             if key in raw_inp.keys():
                 stg_type = ['SSD ', 'eMMC ', 'حافظه\u200cهای هیبریدی ', 'هارد دیسک ']
-                find = raw_inp[key].replace(stg_type[2], '1')
-                find = find.replace(stg_type[3], '2')
-                find = find.replace(stg_type[0], '3')
-                find = find.replace(stg_type[1], '4')
+                find = stg_type.index(raw_inp[key])
                 outdict['DiskType'] = int(find)
             else:
                 outdict['DiskType'] = 1
@@ -70,7 +70,23 @@ def miner(raw_inp):
             outdict['RAMCapacity'] = int(find)
             
         elif key == 'سری پردازنده':
-            outdict['CPUSerie'] = raw_inp[key][:-1]
+            CPUModel = ['Core i7',
+                        'Pentium',
+                        'M1',
+                        'Ryzen 3',
+                        'Bristol Ridge',
+                        'A6',
+                        'Core i5',
+                        'Core i9',
+                        'Celeron',
+                        'Ryzen 5',
+                        'Core i3',
+                        'ATHLON',
+                        'Ryzen 7',
+                        'Quad Core']
+            find = raw_inp[key][:-1]
+            find = CPUModel.index(find)
+            outdict['CPUSerie'] = find
 
         elif key == 'حافظه Cache':
             if key in raw_inp.keys():
