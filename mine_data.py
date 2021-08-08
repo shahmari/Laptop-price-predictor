@@ -76,7 +76,7 @@ def miner(raw_inp):
             if key in raw_inp.keys():
                 find = raw_inp[key].replace(' مگابایت ', '')
                 outdict['CacheCapacity'] = int(find)
-            elif raw_inp['price'] < 10000000:
+            elif int(raw_inp['price']) < 10000000:
                 outdict['CacheCapacity'] = 1
             else:
                 outdict['CacheCapacity'] = 5
